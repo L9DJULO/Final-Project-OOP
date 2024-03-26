@@ -15,7 +15,7 @@ namespace Final_Project_OOP.Controllers
         public ActionResult Details(int id)
         {
             return View();
-        }
+        }   
 
         // GET: FacultyMemberController/Create
         public ActionResult Create()

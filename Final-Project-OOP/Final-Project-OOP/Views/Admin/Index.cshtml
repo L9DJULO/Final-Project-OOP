@@ -1,7 +1,31 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@model List<Final_Project_OOP.Models.Course> // Specify the correct namespace and model name
+
+<h1>Admin Dashboard</h1>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Available Courses</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Name</td>
+                    <td>@course.Code</td>
+                    <td>@course.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-
-<h1>Index</h1>
-
+else
+{
+    <p>No courses found.</p>
+}

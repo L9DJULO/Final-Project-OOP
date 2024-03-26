@@ -1,7 +1,36 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@model Final_Project_OOP.Models.Faculty // Specify the correct namespace and model name
+
+<h1>Welcome, @Model.FirstName @Model.LastName</h1>
+
+<h2>Your Information</h2>
+<p><strong>Email:</strong> @Model.Email</p>
+<!-- Add more properties as needed -->
+@if (Model.StudentContacts != null && Model.StudentContacts.Any())
+{
+    <h2>Your Student Contacts</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <!-- Add more columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.StudentContacts)
+            {
+                <tr>
+                    <td>@student.FirstName</td>
+                    <td>@student.LastName</td>
+                    <td>@student.Email</td>
+                    <!-- Display other properties of the student -->
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-
-<h1>Index</h1>
-
+else
+{
+    <p>No student contacts found.</p>
+}
