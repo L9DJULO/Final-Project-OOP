@@ -1,0 +1,25 @@
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+
+# Rider files
+.idea/
+
+# Build and output directories
+/bin/
+/obj/
+*.dll
+*.exe
+
+# Packages
+/packages/
+
+# User-specific files
+*.userprefs
+*.usertasks
+
+# Dependency directories
+node_modules/
+bower_components/
