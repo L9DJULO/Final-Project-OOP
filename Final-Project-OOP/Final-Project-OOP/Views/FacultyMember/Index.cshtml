@@ -1,30 +1,28 @@
-﻿@model Final_Project_OOP.Models.Faculty // Specify the correct namespace and model name
+﻿@model Final_Project_OOP.Models.FacultyMember 
 
 <h1>Welcome, @Model.FirstName @Model.LastName</h1>
 
 <h2>Your Information</h2>
 <p><strong>Email:</strong> @Model.Email</p>
 <!-- Add more properties as needed -->
-@if (Model.StudentContacts != null && Model.StudentContacts.Any())
+@if (Model.Courses != null && Model.Courses.Any())
 {
-    <h2>Your Student Contacts</h2>
+    <h2>Your Courses</h2>
     <table class="table">
         <thead>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <!-- Add more columns as needed -->
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var student in Model.StudentContacts)
+            @foreach (var course in Model.Courses)
             {
                 <tr>
-                    <td>@student.FirstName</td>
-                    <td>@student.LastName</td>
-                    <td>@student.Email</td>
-                    <!-- Display other properties of the student -->
+                    <td>@course.Name</td>
+                    <td>@course.Code</td>
+                    <td>@course.Description</td>
                 </tr>
             }
         </tbody>
@@ -32,5 +30,5 @@
 }
 else
 {
-    <p>No student contacts found.</p>
+    <p>No courses found.</p>
 }
