@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Final_Project_OOP.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_OOP.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: AdminController
+        // Action for displaying the admin dashboard
+        public IActionResult Dashboard()
+        {
+            var courses = new List<Course>(); // Get courses from the database
+
+            return View(courses);
+        }
+
         public ActionResult Index()
         {
             return View();
