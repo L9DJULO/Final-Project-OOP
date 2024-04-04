@@ -26,10 +26,7 @@ namespace Final_Project_OOP.Controllers
         }
 
         // GET: AdminController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+  
 
         // POST: AdminController/Create
         [HttpPost]

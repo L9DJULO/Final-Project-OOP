@@ -1,0 +1,43 @@
+﻿@page
+@model Final_Project_OOP.Models.Student
+@{
+    //string message = (string)ViewData["Message"];
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Fill In Student Info</legend>
+
+        <form action="#" method="post" data-validate="parsley">
+
+            <div class='row'>
+                <label for='FirstName'>First Name</label>
+                <input type="text" placeholder="First Name" name='FirstName' id='FirstName' data-required="true" data-error-message="The First Name is required">
+            </div>
+            <div class='row'>
+                <label for='LastName'>Last Name</label>
+                <input type="text" placeholder="Last Name" name='LastName' id='LastName' data-required="true" data-error-message="The Last Name is required">
+            </div>
+            <div class='row'>
+                <label for="Email">E-mail</label>
+                <input type="text" placeholder="E-mail" name='Email' data-required="true" data-type="Email" data-error-message="The E-mail is required">
+            </div>
+            <div class='row'>
+                <label for="Address">Address</label>
+                <input type="text" placeholder="Address" name='Address' data-required="true" data-error-message="The Address is required">
+            </div>
+            <div class='row'>
+                <label for="Password">Password</label>
+                <input type="text" placeholder="Password" name='Password' data-required="true" data-error-message="A Password is required">
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</div>
