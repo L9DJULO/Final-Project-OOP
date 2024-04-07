@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[7.0.12, )"

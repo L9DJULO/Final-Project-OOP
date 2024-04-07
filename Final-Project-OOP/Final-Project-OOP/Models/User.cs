@@ -1,9 +1,12 @@
-﻿namespace Final_Project_OOP.Models
+﻿using Google.Cloud.Firestore;
+
+namespace Final_Project_OOP.Models
 {
+    [FirestoreData]
     public class User
     {
-        public int email { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
+        [FirestoreProperty] public string email { get; set; }
+        [FirestoreProperty] public string Password { get; set; }
+        [FirestoreProperty] public string Role { get; set; }
     }
 }

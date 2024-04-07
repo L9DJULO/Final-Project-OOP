@@ -2,10 +2,12 @@
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
-using Firebase.Database;
-using Firebase.Database.Query;
+using Google.Cloud.Firestore;
+using Google.Cloud.Firestore.V1;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Final_Project_OOP.Controllers
 {
@@ -13,7 +15,8 @@ namespace Final_Project_OOP.Controllers
     {
         private readonly FirebaseAuthConfig _config;
         private readonly FirebaseAuthClient _authClient;
-        private readonly FirebaseClient _client;
+        private readonly FirestoreDb _db;
+        private readonly FirestoreClient _client;
         public HomeController(IConfiguration configuration)
         {
             _config = new FirebaseAuthConfig
@@ -35,22 +38,29 @@ namespace Final_Project_OOP.Controllers
             };
 
             _authClient = new FirebaseAuthClient(_config);
-            _client = new FirebaseClient(configuration["Firebase:DatabaseUrl"]);
+            _db  = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
+            //_client = FirestoreClientBuilder.
         }
 
-        public async Task<IActionResult> Index(string email, string password)
+        public async Task<IActionResult> Index(Models.User model)
+        {
+            return View(model);
+        }
+
+        public async Task<IActionResult> Login(Models.User user)
         {
             try
             {
-                var userCredential = await _authClient.SignInWithEmailAndPasswordAsync("email", "password");
+                var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(user.email,user.Password);
                 // Handle successful login
-                return RedirectToAction("Dashboard", "Home");
+                var userID = userCredential.User.Uid;
+                return RedirectToAction("Welcome", new { id = userID });
             }
             catch (Exception ex)
             {
                 // Handle login failure
-                return View();
-            }   
+                return RedirectToAction("Index", new { user });
+            }
         }
 
         public async Task<ActionResult> CreateStudentAsync(Student model)
@@ -59,11 +69,12 @@ namespace Final_Project_OOP.Controllers
 
             try
             {
-                var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(model.Email, model.Password, model.FirstName + " " + model.LastName);
+                var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(model.email, model.Password, model.FirstName + " " + model.LastName);
                 // Handle successful SignUp 
                 //await _database.Collection("Users").Document(_authClient.User.Uid).SetAsync(model);
-                var dino = await _client.Child("Users").PostAsync(model);
-
+                /*TODO: Add User To Database*/
+                CollectionReference collection = _db.Collection("users");
+                DocumentReference document = await collection.AddAsync(new { model });
                 return RedirectToAction(actionName:"Welcome", new {model});
             }
             catch (Exception ex)
@@ -72,12 +83,6 @@ namespace Final_Project_OOP.Controllers
                 TempData["ErrorMessage"] = ex.Message;
                 return View(model);
             }
-            
-        }
-
-        public ActionResult Welcome(Student model)
-        {
-            return View(model);
         }
 
         public IActionResult Privacy()
