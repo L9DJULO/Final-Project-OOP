@@ -4,6 +4,13 @@
     //string message = (string)ViewData["Message"];
 }
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 <div id="registration-form">
     <div class='fieldset'>
         <legend>Fill In Student Info</legend>

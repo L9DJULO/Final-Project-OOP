@@ -16,7 +16,6 @@ namespace Final_Project_OOP.Controllers
         private readonly FirebaseAuthConfig _config;
         private readonly FirebaseAuthClient _authClient;
         private readonly FirestoreDb _db;
-        private readonly FirestoreClient _client;
         public HomeController(IConfiguration configuration)
         {
             _config = new FirebaseAuthConfig
@@ -49,7 +48,7 @@ namespace Final_Project_OOP.Controllers
 
         public async Task<ActionResult> CreateStudentAsync(Student model)
         {
-            ViewData["Message"] = "";
+            TempData["Message"] = "";
 
             try
             {
@@ -58,7 +57,8 @@ namespace Final_Project_OOP.Controllers
                 //await _database.Collection("Users").Document(_authClient.User.Uid).SetAsync(model);
                 /*TODO: Add User To Database*/
                 CollectionReference collection = _db.Collection("users");
-                DocumentReference document = await collection.AddAsync(new { model });
+                model.StudentId = userCredential.User.Uid;
+                DocumentReference document = await collection.AddAsync(model);
                 return RedirectToAction(actionName:"Welcome", new {model});
             }
             catch (Exception ex)
@@ -87,12 +87,11 @@ namespace Final_Project_OOP.Controllers
                 var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(user.email, user.Password);
                 // Handle successful login
                 var userID = userCredential.User.Uid;
-
                 // Redirect based on the selected role
                 switch (role)
                 {
                     case "Student":
-                        return RedirectToAction("Index", "Student");
+                        return RedirectToAction("Index", "Student", new { StudentId = userID});
                     case "FacultyMember":
                         return RedirectToAction("Index", "FacultyMember");
                     case "Admin":

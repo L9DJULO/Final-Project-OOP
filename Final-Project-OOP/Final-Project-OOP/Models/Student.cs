@@ -5,7 +5,7 @@ namespace Final_Project_OOP.Models
     [FirestoreData]
     public class Student : User
     {
-        [FirestoreProperty] public int StudentId { get; set; }
+        [FirestoreProperty] public string StudentId { get; set; }
         [FirestoreProperty] public string FirstName { get; set; }
         [FirestoreProperty] public string LastName { get; set; }
         [FirestoreProperty] public string Address { get; set; }

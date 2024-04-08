@@ -1,14 +1,41 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Final_Project_OOP.Models;
+using Google.Cloud.Firestore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace Final_Project_OOP.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly FirestoreDb _db;
+        public StudentController(IConfiguration configuration) {
+
+            _db = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
+
+        }
+
         // GET: StudentController
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string StudentId)
         {
-            return View();
+            Query query = _db.Collection("users").WhereEqualTo("StudentId", StudentId);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+            /*DocumentReference studentDoc = _db.Collection("users").Document(StudentId);
+            DocumentSnapshot snapshot = await studentDoc.GetSnapshotAsync();*/
+
+            Student student = null;
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                student = document.ConvertTo<Student>();
+            }
+
+            if(student == null)
+            {
+                throw new Exception("Student noy found");
+            }
+
+            return View(student);
         }
 
         // GET: StudentController/Details/5
