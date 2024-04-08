@@ -1,72 +1,76 @@
-﻿using Google.Cloud.Firestore;
-using Final_Project_OOP.Models;
+﻿using Final_Project_OOP.Models;
+using Google.Cloud.Firestore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace Final_Project_OOP.Controllers
 {
     public class FacultyMemberController : Controller
     {
-        private readonly FirestoreDb _firestoreDb;
+        private readonly FirestoreDb _db;
 
         public FacultyMemberController(IConfiguration configuration)
         {
-            // Initialise Firestore DB connection
-            string projectId = configuration["Firebase:ProjectId"];
-            _firestoreDb = FirestoreDb.Create(projectId);
+            _db = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
         }
 
-        
-        public IActionResult Index()
+        // GET: FacultyMemberController
+        public async Task<ActionResult> Index(string facultyMemberId)
         {
-            return View();
+            Query query = _db.Collection("facultyMembers").WhereEqualTo("FacultyMemberId", facultyMemberId);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+            FacultyMember facultyMember = null;
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                facultyMember = document.ConvertTo<FacultyMember>();
+            }
+
+            if (facultyMember == null)
+            {
+                return NotFound();
+            }
+
+            return View(facultyMember);
         }
 
-        
-        public IActionResult CreateAssignment(string courseId)
-        {
-            ViewData["CourseId"] = courseId;
-            return View();
-        }
-
-        
+        // POST: FacultyMemberController/CreateAssignment
         [HttpPost]
-        public async Task<IActionResult> CreateAssignment(string courseId, Assignment assignment)
+        public async Task<ActionResult> CreateAssignment(Assignment model)
         {
-            try
+            var assignment = new Assignment
             {
-                DocumentReference courseRef = _firestoreDb.Collection("Courses").Document(courseId);
-                CollectionReference assignmentsRef = courseRef.Collection("Assignments");
-                await assignmentsRef.AddAsync(assignment);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View(assignment);
-            }
+                CourseId = model.CourseId,
+                Course = model.Course,
+                Name = model.Name,
+                Description = model.Description,
+                Deadline = model.Deadline
+            };
+
+            await _db.Collection("assignments").AddAsync(assignment);
+
+            return RedirectToAction("Index");
         }
 
-        
-        public async Task<IActionResult> AddGradeToStudentInCourse(string courseId, string studentId, string assignmentId, int grade)
+        // POST: FacultyMemberController/GradeAssignment
+        [HttpPost]
+        public async Task<ActionResult> GradeAssignment(string assignmentId, Dictionary<string, double> studentGrades)
         {
-            try
+            foreach (var studentGrade in studentGrades)
             {
-                DocumentReference studentRef = _firestoreDb.Collection("Courses").Document(courseId)
-                    .Collection("Students").Document(studentId)
-                    .Collection("Assignments").Document(assignmentId);
+                DocumentReference studentRef = _db.Collection("students").Document(studentGrade.Key);
+                DocumentSnapshot studentDoc = await studentRef.GetSnapshotAsync();
+                if (studentDoc.Exists)
+                {
+                    Dictionary<string, object> update = new Dictionary<string, object>
+                    {
+                        { $"Grades.{assignmentId}", studentGrade.Value }
+                    };
+                    await studentRef.UpdateAsync(update);
+                }
+            }
 
-                await studentRef.SetAsync(new { Grade = grade }, SetOptions.MergeAll);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return View("Error");
-            }
+            return RedirectToAction("Index");
         }
-
-        
     }
 }

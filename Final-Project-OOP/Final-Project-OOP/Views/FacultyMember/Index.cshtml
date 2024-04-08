@@ -1,37 +1,25 @@
-﻿@model List<Final_Project_OOP.Models.Course>
+﻿@model Final_Project_OOP.Models.FacultyMember
 
 @{
-    ViewData["Title"] = "Liste des Cours";
+    ViewBag.Title = "Faculty Member Dashboard";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2>@ViewBag.Title</h2>
 
-@if (Model != null && Model.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom du Cours</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var course in Model)
-            {
-                <tr>
-                    <td>@course.Name</td>
-                    <td>@course.Description</td>
-                    <td>
-                        <a href="@Url.Action("Details", "Course", new { id = course.CourseId })" class="btn btn-info">Détails</a>
-                        <a href="@Url.Action("CreateAssignment", "FacultyMember", new { courseId = course.CourseId })" class="btn btn-primary">Créer un Devoir</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Aucun cours n'est disponible pour l'instant.</p>
-}
+<!-- Form for creating an assignment -->
+<form asp-action="CreateAssignment" method="post">
+    <input type="text" name="CourseId" placeholder="Course ID" required />
+    <input type="text" name="Subject" placeholder="Subject" required />
+    <input type="text" name="Name" placeholder="Assignment Name" required />
+    <textarea name="Description" placeholder="Description"></textarea>
+    <input type="datetime-local" name="Deadline" required />
+    <button type="submit">Create Assignment</button>
+</form>
+
+<!-- Form for grading an assignment (simplified version) -->
+<form asp-action="GradeAssignment" method="post">
+    <input type="text" name="AssignmentId" placeholder="Assignment ID" required />
+    <input type="text" name="StudentId" placeholder="Student ID" required />
+    <input type="number" name="Grade" step="0.1" placeholder="Grade" required />
+    <button type="submit">Grade Student</button>
+</form>
