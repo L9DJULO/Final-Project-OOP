@@ -1,83 +1,76 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Final_Project_OOP.Models;
+using Google.Cloud.Firestore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Final_Project_OOP.Controllers
 {
     public class FacultyMemberController : Controller
     {
+        private readonly FirestoreDb _db;
+
+        public FacultyMemberController(IConfiguration configuration)
+        {
+            _db = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
+        }
+
         // GET: FacultyMemberController
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string facultyMemberId)
         {
-            return View();
+            Query query = _db.Collection("facultyMembers").WhereEqualTo("FacultyMemberId", facultyMemberId);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+            FacultyMember facultyMember = null;
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                facultyMember = document.ConvertTo<FacultyMember>();
+            }
+
+            if (facultyMember == null)
+            {
+                return NotFound();
+            }
+
+            return View(facultyMember);
         }
 
-        // GET: FacultyMemberController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }   
-
-        // GET: FacultyMemberController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: FacultyMemberController/Create
+        // POST: FacultyMemberController/CreateAssignment
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAssignment(Assignment model)
         {
-            try
+            var assignment = new Assignment
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                CourseId = model.CourseId,
+                Course = model.Course,
+                Name = model.Name,
+                Description = model.Description,
+                Deadline = model.Deadline
+            };
+
+            await _db.Collection("assignments").AddAsync(assignment);
+
+            return RedirectToAction("Index");
         }
 
-        // GET: FacultyMemberController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: FacultyMemberController/Edit/5
+        // POST: FacultyMemberController/GradeAssignment
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> GradeAssignment(string assignmentId, Dictionary<string, double> studentGrades)
         {
-            try
+            foreach (var studentGrade in studentGrades)
             {
-                return RedirectToAction(nameof(Index));
+                DocumentReference studentRef = _db.Collection("students").Document(studentGrade.Key);
+                DocumentSnapshot studentDoc = await studentRef.GetSnapshotAsync();
+                if (studentDoc.Exists)
+                {
+                    Dictionary<string, object> update = new Dictionary<string, object>
+                    {
+                        { $"Grades.{assignmentId}", studentGrade.Value }
+                    };
+                    await studentRef.UpdateAsync(update);
+                }
             }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: FacultyMemberController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: FacultyMemberController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

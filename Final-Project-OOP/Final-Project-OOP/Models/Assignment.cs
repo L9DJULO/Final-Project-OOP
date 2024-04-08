@@ -11,5 +11,6 @@ namespace Final_Project_OOP.Models
         [FirestoreProperty]public DateTime ReleaseDate { get; set; }
         [FirestoreProperty]public int CourseId { get; set; }
         [FirestoreProperty]public Course Course { get; set; }
+        [FirestoreProperty]public string Name { get; set; }
     }
 }

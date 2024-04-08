@@ -1,43 +1,25 @@
 ﻿@model Final_Project_OOP.Models.FacultyMember
 
-<h1>Welcome, @Model.FirstName @Model.LastName</h1>
-
-<h2>Your Courses</h2>
-@if (Model.Courses != null && Model.Courses.Any())
-{
-    <ul>
-        @foreach (var course in Model.Courses)
-        {
-            <li>
-                <a asp-controller="Course" asp-action="Details" asp-route-id="@course.CourseId">@course.Name</a>
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No courses found.</p>
+@{
+    ViewBag.Title = "Faculty Member Dashboard";
 }
 
-<h2>Create Assignment</h2>
-<form method="post" asp-controller="Assignment" asp-action="Create">
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" name="description" required>
-    </div>
-    <div class="form-group">
-        <label for="deadline">Deadline</label>
-        <input type="datetime-local" class="form-control" id="deadline" name="deadline" required>
-    </div>
-    <div class="form-group">
-        <label for="courseId">Course</label>
-        <select class="form-control" id="courseId" name="courseId" required>
-            <option value="">Select a course</option>
-            @foreach (var course in Model.Courses)
-            {
-                <option value="@course.CourseId">@course.Name</option>
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Assignment</button>
+<h2>@ViewBag.Title</h2>
+
+<!-- Form for creating an assignment -->
+<form asp-action="CreateAssignment" method="post">
+    <input type="text" name="CourseId" placeholder="Course ID" required />
+    <input type="text" name="Subject" placeholder="Subject" required />
+    <input type="text" name="Name" placeholder="Assignment Name" required />
+    <textarea name="Description" placeholder="Description"></textarea>
+    <input type="datetime-local" name="Deadline" required />
+    <button type="submit">Create Assignment</button>
+</form>
+
+<!-- Form for grading an assignment (simplified version) -->
+<form asp-action="GradeAssignment" method="post">
+    <input type="text" name="AssignmentId" placeholder="Assignment ID" required />
+    <input type="text" name="StudentId" placeholder="Student ID" required />
+    <input type="number" name="Grade" step="0.1" placeholder="Grade" required />
+    <button type="submit">Grade Student</button>
 </form>
