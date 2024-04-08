@@ -46,28 +46,7 @@ namespace Final_Project_OOP.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> CreateStudentAsync(Student model)
-        {
-            TempData["Message"] = "";
-
-            try
-            {
-                var userCredential = await _authClient.CreateUserWithEmailAndPasswordAsync(model.email, model.Password, model.FirstName + " " + model.LastName);
-                // Handle successful SignUp 
-                //await _database.Collection("Users").Document(_authClient.User.Uid).SetAsync(model);
-                /*TODO: Add User To Database*/
-                CollectionReference collection = _db.Collection("users");
-                model.StudentId = userCredential.User.Uid;
-                DocumentReference document = await collection.AddAsync(model);
-                return RedirectToAction(actionName:"Welcome", new {model});
-            }
-            catch (Exception ex)
-            {
-                // Handle SignUp failure
-                TempData["ErrorMessage"] = ex.Message;
-                return View(model);
-            }
-        }
+        
 
         public IActionResult Privacy()
         {
