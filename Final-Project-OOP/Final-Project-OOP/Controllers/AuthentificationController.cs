@@ -47,22 +47,6 @@ namespace Final_Project_OOP.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Login(Models.User user)
-        {
-            try
-            {
-                var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(user.email,user.Password);
-                // Handle successful login
-                var userID = userCredential.User.Uid;
-                return RedirectToAction("Welcome", new { id = userID });
-            }
-            catch (Exception ex)
-            {
-                // Handle login failure
-                return RedirectToAction("Index", new { user });
-            }
-        }
-
         public async Task<ActionResult> CreateStudentAsync(Student model)
         {
             ViewData["Message"] = "";
@@ -94,6 +78,35 @@ namespace Final_Project_OOP.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public async Task<IActionResult> Login(Models.User user, string role)
+        {
+            try
+            {
+                var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(user.email, user.Password);
+                // Handle successful login
+                var userID = userCredential.User.Uid;
+
+                // Redirect based on the selected role
+                switch (role)
+                {
+                    case "Student":
+                        return RedirectToAction("Index", "Student");
+                    case "FacultyMember":
+                        return RedirectToAction("Index", "FacultyMember");
+                    case "Admin":
+                        return RedirectToAction("Index", "Admin");
+                    default:
+                        // Handle invalid role or other cases
+                        return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle login failure
+                return RedirectToAction("Index", new { user });
+            }
         }
     }
 }
