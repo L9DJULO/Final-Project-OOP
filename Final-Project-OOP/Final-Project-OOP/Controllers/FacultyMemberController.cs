@@ -1,83 +1,72 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Google.Cloud.Firestore;
+using Final_Project_OOP.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace Final_Project_OOP.Controllers
 {
     public class FacultyMemberController : Controller
     {
-        // GET: FacultyMemberController
-        public ActionResult Index()
+        private readonly FirestoreDb _firestoreDb;
+
+        public FacultyMemberController(IConfiguration configuration)
+        {
+            // Initialise Firestore DB connection
+            string projectId = configuration["Firebase:ProjectId"];
+            _firestoreDb = FirestoreDb.Create(projectId);
+        }
+
+        
+        public IActionResult Index()
         {
             return View();
         }
 
-        // GET: FacultyMemberController/Details/5
-        public ActionResult Details(int id)
+        
+        public IActionResult CreateAssignment(string courseId)
         {
-            return View();
-        }   
-
-        // GET: FacultyMemberController/Create
-        public ActionResult Create()
-        {
+            ViewData["CourseId"] = courseId;
             return View();
         }
 
-        // POST: FacultyMemberController/Create
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> CreateAssignment(string courseId, Assignment assignment)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                DocumentReference courseRef = _firestoreDb.Collection("Courses").Document(courseId);
+                CollectionReference assignmentsRef = courseRef.Collection("Assignments");
+                await assignmentsRef.AddAsync(assignment);
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return View(assignment);
             }
         }
 
-        // GET: FacultyMemberController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: FacultyMemberController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        
+        public async Task<IActionResult> AddGradeToStudentInCourse(string courseId, string studentId, string assignmentId, int grade)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                DocumentReference studentRef = _firestoreDb.Collection("Courses").Document(courseId)
+                    .Collection("Students").Document(studentId)
+                    .Collection("Assignments").Document(assignmentId);
+
+                await studentRef.SetAsync(new { Grade = grade }, SetOptions.MergeAll);
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["ErrorMessage"] = ex.Message;
+                return View("Error");
             }
         }
 
-        // GET: FacultyMemberController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: FacultyMemberController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

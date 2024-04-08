@@ -1,43 +1,37 @@
-﻿@model Final_Project_OOP.Models.FacultyMember
+﻿@model List<Final_Project_OOP.Models.Course>
 
-<h1>Welcome, @Model.FirstName @Model.LastName</h1>
+@{
+    ViewData["Title"] = "Liste des Cours";
+}
 
-<h2>Your Courses</h2>
-@if (Model.Courses != null && Model.Courses.Any())
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Any())
 {
-    <ul>
-        @foreach (var course in Model.Courses)
-        {
-            <li>
-                <a asp-controller="Course" asp-action="Details" asp-route-id="@course.CourseId">@course.Name</a>
-            </li>
-        }
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du Cours</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.Name</td>
+                    <td>@course.Description</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Course", new { id = course.CourseId })" class="btn btn-info">Détails</a>
+                        <a href="@Url.Action("CreateAssignment", "FacultyMember", new { courseId = course.CourseId })" class="btn btn-primary">Créer un Devoir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
-    <p>No courses found.</p>
+    <p>Aucun cours n'est disponible pour l'instant.</p>
 }
-
-<h2>Create Assignment</h2>
-<form method="post" asp-controller="Assignment" asp-action="Create">
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" name="description" required>
-    </div>
-    <div class="form-group">
-        <label for="deadline">Deadline</label>
-        <input type="datetime-local" class="form-control" id="deadline" name="deadline" required>
-    </div>
-    <div class="form-group">
-        <label for="courseId">Course</label>
-        <select class="form-control" id="courseId" name="courseId" required>
-            <option value="">Select a course</option>
-            @foreach (var course in Model.Courses)
-            {
-                <option value="@course.CourseId">@course.Name</option>
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Create Assignment</button>
-</form>
