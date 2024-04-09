@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabri\\TP EPITA PROG\\OOP-Project\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj": {}
+    "C:\\Users\\Ordi\\Desktop\\TRAVAIL\\TRAVAILANNEE3\\S4\\OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabri\\TP EPITA PROG\\OOP-Project\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj": {
+    "C:\\Users\\Ordi\\Desktop\\TRAVAIL\\TRAVAILANNEE3\\S4\\OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabri\\TP EPITA PROG\\OOP-Project\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj",
+        "projectUniqueName": "C:\\Users\\Ordi\\Desktop\\TRAVAIL\\TRAVAILANNEE3\\S4\\OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj",
         "projectName": "Final-Project-OOP",
-        "projectPath": "C:\\Users\\gabri\\TP EPITA PROG\\OOP-Project\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj",
-        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabri\\TP EPITA PROG\\OOP-Project\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\obj\\",
+        "projectPath": "C:\\Users\\Ordi\\Desktop\\TRAVAIL\\TRAVAILANNEE3\\S4\\OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP.csproj",
+        "packagesPath": "C:\\Users\\Ordi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ordi\\Desktop\\TRAVAIL\\TRAVAILANNEE3\\S4\\OOP\\Final-Project-OOP\\Final-Project-OOP\\Final-Project-OOP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ordi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

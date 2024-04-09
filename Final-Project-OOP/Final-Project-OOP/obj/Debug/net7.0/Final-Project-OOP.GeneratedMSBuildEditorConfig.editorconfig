@@ -9,63 +9,63 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Final_Project_OOP
 build_property.RootNamespace = Final_Project_OOP
-build_property.ProjectDir = C:\Users\gabri\TP EPITA PROG\OOP-Project\Final-Project-OOP\Final-Project-OOP\Final-Project-OOP\
+build_property.ProjectDir = C:\Users\Ordi\Desktop\TRAVAIL\TRAVAILANNEE3\S4\OOP\Final-Project-OOP\Final-Project-OOP\Final-Project-OOP\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\gabri\TP EPITA PROG\OOP-Project\Final-Project-OOP\Final-Project-OOP\Final-Project-OOP
+build_property.MSBuildProjectDirectory = C:\Users\Ordi\Desktop\TRAVAIL\TRAVAILANNEE3\S4\OOP\Final-Project-OOP\Final-Project-OOP\Final-Project-OOP
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Admin/Index.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/FacultyMember/Index.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/FacultyMember/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eU1lbWJlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/CreateTeacher.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/CreateTeacher.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGVUZWFjaGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Index.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Privacy.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Welcome.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Home/Welcome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWxjb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/Error.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Student/Create.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Student/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Student/Index.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Student/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/_ViewImports.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/_ViewStart.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/gabri/TP EPITA PROG/OOP-Project/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/_Layout.cshtml]
+[C:/Users/Ordi/Desktop/TRAVAIL/TRAVAILANNEE3/S4/OOP/Final-Project-OOP/Final-Project-OOP/Final-Project-OOP/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qmmjvpn9ei

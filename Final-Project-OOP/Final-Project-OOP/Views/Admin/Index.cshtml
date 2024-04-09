@@ -1,31 +1,59 @@
-﻿@model List<Final_Project_OOP.Models.Course> // Specify the correct namespace and model name
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <!-- Include necessary CSS and JavaScript libraries here -->
+</head>
+<body>
+    <h1>Welcome to the Admin Dashboard</h1>
 
-<h1>Admin Dashboard</h1>
+    <h2>Create Course</h2>
+    <form asp-action="CreateCourse" method="post">
+        <input type="text" name="Name" placeholder="Course Name" required />
+        <input type="text" name="Code" placeholder="Course Code" required />
+        <input type="text" name="Description" placeholder="Description" />
+        <input type="text" name="LecturerId" placeholder="Lecturer ID" required />
+        <!-- You can include additional fields if needed -->
+        <button type="submit">Create Course</button>
+    </form>
 
-@if (Model != null && Model.Any())
-{
-    <h2>Available Courses</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var course in Model)
-            {
-                <tr>
-                    <td>@course.Name</td>
-                    <td>@course.Code</td>
-                    <td>@course.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No courses found.</p>
-}
+    <h2>Delete Course</h2>
+    <form asp-action="DeleteCourse" method="post">
+        <input type="text" name="courseId" placeholder="Course ID" required />
+        <button type="submit">Delete Course</button>
+    </form>
+
+    <!-- Student Creation Form -->
+    <h2>Create Student</h2>
+    <form asp-action="CreateStudent" method="post">
+        <input type="text" name="FirstName" placeholder="First Name" required />
+        <input type="text" name="LastName" placeholder="Last Name" required />
+        <input type="text" name="Address" placeholder="Address" />
+        <!-- You can include additional fields if needed -->
+        <button type="submit">Create Student</button>
+    </form>
+
+    <h2>Delete Student</h2>
+    <form asp-action="DeleteStudent" method="post">
+        <input type="text" name="studentId" placeholder="Student ID" required />
+        <button type="submit">Delete Student</button>
+    </form>
+
+    <!-- Faculty Member Creation Form -->
+    <h2>Create Faculty Member</h2>
+    <form asp-action="CreateFacultyMember" method="post">
+        <input type="text" name="FirstName" placeholder="First Name" required />
+        <input type="text" name="LastName" placeholder="Last Name" required />
+        <!-- You can include additional fields if needed -->
+        <button type="submit">Create Faculty Member</button>
+    </form>
+
+    <h2>Delete Faculty Member</h2>
+    <form asp-action="DeleteFacultyMember" method="post">
+        <input type="text" name="facultyMemberId" placeholder="Faculty Member ID" required />
+        <button type="submit">Delete Faculty Member</button>
+    </form>
+
+
+</body>
+</html>
