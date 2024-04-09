@@ -44,8 +44,7 @@ namespace Final_Project_OOP.Controllers
             Query query = _db.Collection("users").WhereEqualTo("StudentId", StudentId);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
 
-            /*DocumentReference studentDoc = _db.Collection("users").Document(StudentId);
-            DocumentSnapshot snapshot = await studentDoc.GetSnapshotAsync();*/
+            
 
             Student student = null;
             foreach (DocumentSnapshot document in querySnapshot.Documents)
@@ -61,10 +60,62 @@ namespace Final_Project_OOP.Controllers
             return student;
         }
 
+        public async Task<Student> UpdateStudentFromId(string StudentId, Student student)
+        {
+            Query query = _db.Collection("users").WhereEqualTo("StudentId", StudentId);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+
+
+
+            DocumentReference docRef = null;
+            foreach (DocumentSnapshot document in querySnapshot.Documents)
+            {
+                docRef = document.Reference;
+            }
+
+            if (docRef == null)
+            {
+                throw new Exception("Student not found");
+            }
+
+            await docRef.SetAsync(student);
+
+            return student;
+        }
+
+        public async Task<Course> GetCourseFromId(string CourseId)
+        {
+            DocumentReference courseDoc = _db.Collection("courses").Document(CourseId);
+            DocumentSnapshot snapshot = await courseDoc.GetSnapshotAsync();
+
+            Course course = snapshot.ConvertTo<Course>();
+
+            if(course == null)
+            {
+                throw new Exception("Cannot find course : " + CourseId);
+            }
+
+            return course;
+        }
+
+        public async Task<Course> UpdateCourseFromId(string CourseId, Course course)
+        {
+            DocumentReference docRef = _db.Collection("courses").Document(CourseId);
+
+            if (docRef == null)
+            {
+                throw new Exception("Student not found");
+            }
+
+            await docRef.SetAsync(course);
+
+            return course;
+        }
+
         // GET: StudentController Info Page
         public async Task<ActionResult> Index(string StudentId)
         {
-            
+            Student student = await GetStudentFromId(StudentId);
 
             return View(student);
         }
@@ -99,9 +150,21 @@ namespace Final_Project_OOP.Controllers
             }
         }
 
-        public async Task<ActionResult> SignUpToCours(string studentID)
+        public async Task<ActionResult> SignUpToCourse(string studentID, string CourseId)
         {
+            Student student = await GetStudentFromId(studentID);
+            Course course = await GetCourseFromId(CourseId);
 
+            if(student == null || course == null)
+            {
+                throw new Exception("cannot find student: " + studentID + " and/or course:" + CourseId);
+            }
+
+            student.CoursesId.Add(CourseId);
+            UpdateStudentFromId(studentID, student);
+
+
+            return RedirectToAction(actionName: "Index", new { StudentID = studentID });
         }
 
         // GET: StudentController/Edit/5

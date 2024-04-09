@@ -9,9 +9,9 @@ namespace Final_Project_OOP.Models
         [FirestoreProperty] public string FirstName { get; set; }
         [FirestoreProperty] public string LastName { get; set; }
         [FirestoreProperty] public string Address { get; set; }
-        [FirestoreProperty] public List<Course> Courses { get; set; }
-        [FirestoreProperty] public List<int> CoursesId { get; set; }
+        [FirestoreProperty] public List<string> CoursesId { get; set; }
         [FirestoreProperty] public List<Assignment> Assignments { get; set; }
-        [FirestoreProperty]  public Dictionary<Assignment, int> Grade {  get; set; }
+        [FirestoreProperty] public List<string> AssignmentIds { get; set; }
+        [FirestoreProperty]  public List<(string assignmentId, int grade)> Grades {  get; set; }
     }
 }
