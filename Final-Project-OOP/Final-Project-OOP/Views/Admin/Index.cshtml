@@ -28,6 +28,8 @@
     <!-- Student Creation Form -->
     <h2>Create Student</h2>
     <form asp-action="CreateStudent" method="post">
+        <input type="email" name="Email" placeholder="Email" required />
+        <input type="password" name="Password" placeholder="Password" required />
         <input type="text" name="FirstName" placeholder="First Name" required />
         <input type="text" name="LastName" placeholder="Last Name" required />
         <input type="text" name="Address" placeholder="Address" />
@@ -45,6 +47,8 @@
     <!-- Faculty Member Creation Form -->
     <h2>Create Faculty Member</h2>
     <form asp-action="CreateFacultyMember" method="post">
+        <input type="email" name="Email" placeholder="Email" required />
+        <input type="password" name="Password" placeholder="Password" required />
         <input type="text" name="FirstName" placeholder="First Name" required />
         <input type="text" name="LastName" placeholder="Last Name" required />
         <!-- You can include additional fields if needed -->
