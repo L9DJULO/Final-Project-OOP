@@ -6,7 +6,7 @@ namespace Final_Project_OOP.Models
     public class FacultyMember : User
     {
         [FirestoreProperty]
-        public int FacultyId { get; set; }
+        public string FacultyId { get; set; }
 
         [FirestoreProperty]
         public string FirstName { get; set; }

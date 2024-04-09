@@ -14,9 +14,28 @@ namespace Final_Project_OOP.Controllers
             _db = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
         }
 
+
+        public async Task AddFacultyMemberAsync(FirestoreDb db)
+        {
+            var facultyMember = new FacultyMember
+            {
+                email = "john.doe@example.com",  // Générer un ID unique ici
+                FirstName= "John",
+                LastName= "Doe",
+                Role= "FacultyMember",
+                Password= "password",
+                 
+                // Initialisez les autres champs selon votre modèle
+            };
+
+            DocumentReference docRef = db.Collection("facultyMembers").Document(facultyMember.FacultyId);
+            await docRef.SetAsync(facultyMember);
+        }
+
         // GET: FacultyMemberController
         public async Task<ActionResult> Index(string facultyMemberId)
         {
+            /*
             Query query = _db.Collection("facultyMembers").WhereEqualTo("FacultyMemberId", facultyMemberId);
             QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
 
@@ -32,6 +51,9 @@ namespace Final_Project_OOP.Controllers
             }
 
             return View(facultyMember);
+            */
+
+            return View("Index");
         }
 
         // POST: FacultyMemberController/CreateAssignment
