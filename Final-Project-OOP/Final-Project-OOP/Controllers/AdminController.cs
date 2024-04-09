@@ -1,10 +1,8 @@
 ﻿using Final_Project_OOP.Models;
-using Firebase.Auth;
-using Firebase.Auth.Providers;
-using Firebase.Auth.Repository;
 using Google.Cloud.Firestore;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace Final_Project_OOP.Controllers
 {
@@ -33,38 +31,25 @@ namespace Final_Project_OOP.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateStudent(Student model)
         {
-            await _db.Collection("students").AddAsync(model);
+            // Ajoutez la logique pour définir le rôle de l'utilisateur comme "student"
+            model.Role = "Student";
+            await _db.Collection("users").AddAsync(model);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<ActionResult> CreateFacultyMember(FacultyMember model)
         {
-            await _db.Collection("facultyMembers").AddAsync(model);
+            // Ajoutez la logique pour définir le rôle de l'utilisateur comme "faculty member"
+            model.Role = "Faculty Member";
+            await _db.Collection("users").AddAsync(model);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public async Task<ActionResult> DeleteStudent(string studentId)
+        public async Task<ActionResult> DeleteUser(string userId)
         {
-            var studentRef = _db.Collection("students").Document(studentId);
-            await studentRef.DeleteAsync();
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteCourse(string courseId)
-        {
-            var courseRef = _db.Collection("courses").Document(courseId);
-            await courseRef.DeleteAsync();
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> DeleteFacultyMember(string facultyMemberId)
-        {
-            var facultyMemberRef = _db.Collection("facultyMembers").Document(facultyMemberId);
-            await facultyMemberRef.DeleteAsync();
+            await _db.Collection("users").Document(userId).DeleteAsync();
             return RedirectToAction("Index");
         }
     }
